@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="type_list_item_light_switch" type="id" />
+    <item name="type_list_item_light_dimmer" type="id" />
+
+</resources>
