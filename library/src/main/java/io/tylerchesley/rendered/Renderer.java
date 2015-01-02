@@ -1,13 +1,14 @@
 package io.tylerchesley.rendered;
 
-import android.view.ViewGroup;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
-public interface Renderer<E> {
+public abstract class Renderer<E> extends RecyclerView.ViewHolder {
 
-    public RendererViewHolder<E> createViewHolder(ViewGroup group);
+    public Renderer(View itemView) {
+        super(itemView);
+    }
 
-    int getViewType();
-
-    boolean isFor(E item);
+    public abstract void bindView(E data);
 
 }
