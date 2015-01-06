@@ -23,6 +23,11 @@ public class RendererAdapter<E> extends RecyclerView.Adapter<Renderer<E>> {
             this.provider = provider;
         }
 
+        public Builder<E> renderer(Class<Renderer<E>> rendererClass) {
+            factory(SimpleRendererFactory.from(rendererClass));
+            return this;
+        }
+
         public Builder<E> factory(RendererFactory<E> factory) {
             this.factory = factory;
             return this;
