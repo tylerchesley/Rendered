@@ -20,8 +20,8 @@ public class SimpleRendererFactory<E> implements RendererFactory<E> {
                     "annotation");
         }
 
-        final int layout = layoutAnnotation.layout();
-        int type = typeAnnotation != null ? typeAnnotation.type() : layout;
+        final int layout = layoutAnnotation.value();
+        int type = typeAnnotation != null ? typeAnnotation.value() : layout;
 
         return new SimpleRendererFactory<>(layout, type,
                 new SimpleRendererCreator<>(rendererClass));

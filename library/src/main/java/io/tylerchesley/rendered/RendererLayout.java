@@ -7,6 +7,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface RendererLayout {
 
-    int layout();
+    int value();
 
 }
