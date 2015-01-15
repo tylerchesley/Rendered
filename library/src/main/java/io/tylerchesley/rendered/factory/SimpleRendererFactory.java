@@ -16,6 +16,7 @@ import io.tylerchesley.rendered.renderer.ViewType;
 
 public class SimpleRendererFactory<E> implements RendererFactory<E> {
 
+    @SafeVarargs
     public static <E> SimpleRendererFactory<E> from(Class<? extends Renderer<E>>... classes) {
         final Builder<E> builder = new Builder<>();
         for (Class<? extends Renderer<E>> rendererClass : classes) {
