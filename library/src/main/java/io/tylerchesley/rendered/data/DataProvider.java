@@ -1,4 +1,4 @@
-package io.tylerchesley.rendered;
+package io.tylerchesley.rendered.data;
 
 public interface DataProvider<E> {
 
