@@ -7,6 +7,10 @@ import java.util.List;
 
 public class ListDataProvider<E> implements DataProvider<E> {
 
+    public static <E> ListDataProvider<E> from(List<E> items) {
+        return new ListDataProvider<>(items);
+    }
+
     public static <E> ListDataProvider<E> from(E... items) {
         return new ListDataProvider<>(Arrays.asList(items));
     }
