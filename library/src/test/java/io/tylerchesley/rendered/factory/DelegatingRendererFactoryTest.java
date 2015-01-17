@@ -8,11 +8,11 @@ import org.robolectric.annotation.Config;
 
 @Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
-public class SimpleRendererFactoryTest {
+public class DelegatingRendererFactoryTest {
 
     @Test(expected = NullPointerException.class)
     public void testNullRendererConfigs() {
-        new SimpleRendererFactory<>(null);
+        new DelegatingRendererFactory<>(null);
     }
 
     @Test

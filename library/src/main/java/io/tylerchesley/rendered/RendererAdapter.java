@@ -8,8 +8,11 @@ import java.util.List;
 import io.tylerchesley.rendered.data.DataProvider;
 import io.tylerchesley.rendered.data.ListDataProvider;
 import io.tylerchesley.rendered.factory.RendererFactory;
+import io.tylerchesley.rendered.factory.SimpleRendererFactory;
+import io.tylerchesley.rendered.matcher.SingleViewTypeMatcher;
 import io.tylerchesley.rendered.matcher.ViewTypeMatcher;
 import io.tylerchesley.rendered.renderer.Renderer;
+import io.tylerchesley.rendered.util.Util;
 
 public class RendererAdapter<E> extends RecyclerView.Adapter<Renderer<E>> {
 
@@ -21,41 +24,12 @@ public class RendererAdapter<E> extends RecyclerView.Adapter<Renderer<E>> {
         return new Builder<>(provider);
     }
 
-    public static final class Builder<E> {
-
-        private final DataProvider<E> provider;
-        private RendererFactory<E> factory;
-        private ViewTypeMatcher<E> matcher;
-        public Builder(DataProvider<E> provider) {
-            this.provider = provider;
-        }
-
-        public Builder<E> factory(RendererFactory<E> factory) {
-            this.factory = factory;
-            return this;
-        }
-
-        public Builder<E> matcher(ViewTypeMatcher<E> matcher) {
-            this.matcher = matcher;
-            return this;
-        }
-
-        public RendererAdapter<E> build() {
-            if (factory == null) {
-                throw new NullPointerException("No RendererFactory set");
-            }
-
-            if (matcher == null) {
-                throw new NullPointerException("No ViewTypeMatcher set");
-            }
-
-            return new RendererAdapter<>(factory, matcher, provider);
-        }
-
-        public void into(RecyclerView view) {
-            view.setAdapter(build());
-        }
-
+    public static <E> RendererAdapter<E> from(DataProvider<E> provider,
+                                              Class<? extends Renderer<E>> rendererClass) {
+        final int viewType = Util.getViewType(rendererClass);
+        return from(provider)
+                .factory(SimpleRendererFactory.from(rendererClass))
+                .matcher(new SingleViewTypeMatcher<E>(viewType)).build();
     }
 
     private final RendererFactory<E> factory;
@@ -98,6 +72,48 @@ public class RendererAdapter<E> extends RecyclerView.Adapter<Renderer<E>> {
     @Override
     public int getItemCount() {
         return provider.getCount();
+    }
+
+    public static final class Builder<E> {
+
+        private final DataProvider<E> provider;
+        private RendererFactory<E> factory;
+        private ViewTypeMatcher<E> matcher;
+
+        public Builder(DataProvider<E> provider) {
+            this.provider = provider;
+        }
+
+        public Builder<E> renderer(Class<? extends Renderer<E>> renderClass) {
+            return factory(SimpleRendererFactory.from(renderClass));
+        }
+
+        public Builder<E> factory(RendererFactory<E> factory) {
+            this.factory = factory;
+            return this;
+        }
+
+        public Builder<E> matcher(ViewTypeMatcher<E> matcher) {
+            this.matcher = matcher;
+            return this;
+        }
+
+        public RendererAdapter<E> build() {
+            if (factory == null) {
+                throw new NullPointerException("No RendererFactory set");
+            }
+
+            if (matcher == null) {
+                throw new NullPointerException("No ViewTypeMatcher set");
+            }
+
+            return new RendererAdapter<>(factory, matcher, provider);
+        }
+
+        public void into(RecyclerView view) {
+            view.setAdapter(build());
+        }
+
     }
 
 }
