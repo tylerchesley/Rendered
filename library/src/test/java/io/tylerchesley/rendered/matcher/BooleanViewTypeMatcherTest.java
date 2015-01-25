@@ -2,10 +2,6 @@ package io.tylerchesley.rendered.matcher;
 
 import org.junit.Test;
 
-import io.tylerchesley.rendered.matcher.BooleanViewTypeMatcher;
-import io.tylerchesley.rendered.matcher.PropertyGetter;
-import io.tylerchesley.rendered.matcher.ViewTypeMatcher;
-
 import static org.junit.Assert.assertEquals;
 
 public class BooleanViewTypeMatcherTest {

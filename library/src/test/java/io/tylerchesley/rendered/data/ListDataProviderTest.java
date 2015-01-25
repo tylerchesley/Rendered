@@ -2,8 +2,6 @@ package io.tylerchesley.rendered.data;
 
 import org.junit.Test;
 
-import io.tylerchesley.rendered.data.ListDataProvider;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 

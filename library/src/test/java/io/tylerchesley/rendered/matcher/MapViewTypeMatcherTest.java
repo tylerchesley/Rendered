@@ -2,10 +2,6 @@ package io.tylerchesley.rendered.matcher;
 
 import org.junit.Test;
 
-import io.tylerchesley.rendered.matcher.ClassPropertyGetter;
-import io.tylerchesley.rendered.matcher.MapViewTypeMatcher;
-import io.tylerchesley.rendered.matcher.ViewTypeMatcher;
-
 import static org.junit.Assert.assertEquals;
 
 public class MapViewTypeMatcherTest {

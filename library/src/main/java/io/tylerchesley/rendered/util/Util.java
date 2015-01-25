@@ -2,7 +2,6 @@ package io.tylerchesley.rendered.util;
 
 import io.tylerchesley.rendered.matcher.ViewTypeMatcher;
 import io.tylerchesley.rendered.renderer.Layout;
-import io.tylerchesley.rendered.renderer.Renderer;
 import io.tylerchesley.rendered.renderer.ViewType;
 
 public class Util {
