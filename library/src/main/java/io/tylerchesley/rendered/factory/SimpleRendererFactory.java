@@ -29,6 +29,10 @@ public class SimpleRendererFactory<E> extends InflatingRendererFactory<E> {
     public SimpleRendererFactory(@LayoutRes int layout,
                                  @NonNull Class<? extends Renderer<E>> rendererClass) {
         super(layout);
+        if (rendererClass == null) {
+            throw new NullPointerException("rendererClass may not be null");
+        }
+
         try {
             this.constructor = rendererClass.getConstructor(View.class);
         } catch (NoSuchMethodException e) {
@@ -42,7 +46,6 @@ public class SimpleRendererFactory<E> extends InflatingRendererFactory<E> {
         try {
             return constructor.newInstance(view);
         } catch (Exception e) {
-            e.printStackTrace();
             throw new IllegalArgumentException("Renderer must have a constructor that takes " +
                     "only a view instance", e);
         }
