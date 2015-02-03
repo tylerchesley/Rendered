@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.tylerchesley.rendered.renderer.Renderer;
 import io.tylerchesley.rendered.renderer.ViewType;
 
@@ -19,11 +22,11 @@ public class DelegatingRendererFactory<E> implements RendererFactory<E> {
         return builder.build();
     }
 
-    private final SparseArray<RendererFactory<E>> factories;
+    private final Map<Integer, RendererFactory<E>> factories;
 
-    public DelegatingRendererFactory(@NonNull SparseArray<RendererFactory<E>> factories) {
+    public DelegatingRendererFactory(@NonNull Map<Integer, RendererFactory<E>> factories) {
         if (factories == null) {
-            throw new NullPointerException("Configs may not be null");
+            throw new NullPointerException("Factories may not be null");
         }
         this.factories = factories;
     }
@@ -32,7 +35,7 @@ public class DelegatingRendererFactory<E> implements RendererFactory<E> {
     public Renderer<E> createRenderer(ViewGroup parent, int viewType) {
         final RendererFactory<E> factory = factories.get(viewType);
         if (factory == null) {
-            throw new IllegalArgumentException("No renderer configuration found for viewType "
+            throw new IllegalArgumentException("No RendererFactory instance found for viewType "
                     + viewType);
         }
         return factory.createRenderer(parent, viewType);
@@ -40,10 +43,10 @@ public class DelegatingRendererFactory<E> implements RendererFactory<E> {
 
     public static final class Builder<E> {
 
-        private final SparseArray<RendererFactory<E>> creators;
+        private final Map<Integer, RendererFactory<E>> factories;
 
         public Builder() {
-            this.creators = new SparseArray<>();
+            this.factories = new HashMap<>();
         }
 
         public Builder<E> add(Class<? extends Renderer<E>> rendererClass) {
@@ -67,12 +70,12 @@ public class DelegatingRendererFactory<E> implements RendererFactory<E> {
         }
 
         public Builder<E> add(int viewType, RendererFactory<E> factory) {
-            creators.put(viewType, factory);
+            factories.put(viewType, factory);
             return this;
         }
 
         public DelegatingRendererFactory<E> build() {
-            return new DelegatingRendererFactory<>(creators);
+            return new DelegatingRendererFactory<>(factories);
         }
 
     }
