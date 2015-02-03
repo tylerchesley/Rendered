@@ -1,6 +1,13 @@
 package io.tylerchesley.rendered.matcher;
 
+import io.tylerchesley.rendered.renderer.Renderer;
+import io.tylerchesley.rendered.util.Util;
+
 public class SingleViewTypeMatcher<E> implements ViewTypeMatcher<E> {
+
+    public static <E> SingleViewTypeMatcher<E> from(Class<? extends Renderer<E>> rendererClass) {
+        return from(Util.getViewType(rendererClass));
+    }
 
     public static <E> SingleViewTypeMatcher<E> from(int viewType) {
         return new SingleViewTypeMatcher<>(viewType);
