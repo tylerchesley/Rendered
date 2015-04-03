@@ -2,7 +2,6 @@ package io.tylerchesley.rendered.factory;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.util.SparseArray;
 import android.view.ViewGroup;
 
 import java.util.HashMap;
