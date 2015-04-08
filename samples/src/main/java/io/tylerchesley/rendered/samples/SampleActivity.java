@@ -12,8 +12,8 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import io.tylerchesley.rendered.RendererAdapter;
+import io.tylerchesley.rendered.factory.DelegatingRendererFactory;
 import io.tylerchesley.rendered.factory.RendererFactory;
-import io.tylerchesley.rendered.factory.SimpleRendererFactory;
 import io.tylerchesley.rendered.matcher.BooleanViewTypeMatcher;
 import io.tylerchesley.rendered.matcher.PropertyGetter;
 import io.tylerchesley.rendered.matcher.ViewTypeMatcher;
@@ -36,12 +36,12 @@ public class SampleActivity extends ActionBarActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new Divider(this, Divider.VERTICAL_LIST));
 
-        final RendererFactory<Light> factory = SimpleRendererFactory.from(
+        final RendererFactory<Light> factory = DelegatingRendererFactory.from(
                 LightDimmerViewRenderer.class,
                 LightSwitchViewRenderer.class);
 
         final ViewTypeMatcher<Light> matcher = BooleanViewTypeMatcher
-                .from(new PropertyGetter<Boolean, Light>() {
+                .from(new PropertyGetter<Light, Boolean>() {
                     @Override
                     public Boolean get(Light item) {
                         return item.isDimmable;
