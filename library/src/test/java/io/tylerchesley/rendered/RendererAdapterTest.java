@@ -4,9 +4,6 @@ import android.view.View;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
@@ -22,8 +19,6 @@ import io.tylerchesley.rendered.renderer.ViewType;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@Config(emulateSdk = 18)
-@RunWith(RobolectricTestRunner.class)
 public class RendererAdapterTest {
 
     private static final int TEST_VIEW_TYPE = 666;

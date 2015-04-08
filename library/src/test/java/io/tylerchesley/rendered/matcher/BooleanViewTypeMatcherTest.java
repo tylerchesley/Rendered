@@ -9,8 +9,8 @@ public class BooleanViewTypeMatcherTest {
     private static final int TRUE_VIEW_TYPE = 1;
     private static final int FALSE_VIEW_TYPE = 0;
 
-    private static final PropertyGetter<Boolean, Mother> getter =
-            new PropertyGetter<Boolean, Mother>() {
+    private static final PropertyGetter<Mother, Boolean> getter =
+            new PropertyGetter<Mother, Boolean>() {
                 @Override
                 public Boolean get(Mother item) {
                     return item.isFat;
@@ -19,7 +19,7 @@ public class BooleanViewTypeMatcherTest {
 
     private static BooleanViewTypeMatcher<Mother> createMatcher() {
         return BooleanViewTypeMatcher
-                .from(new PropertyGetter<Boolean, Mother>() {
+                .from(new PropertyGetter<Mother, Boolean>() {
                     @Override
                     public Boolean get(Mother item) {
                         return item.isFat;

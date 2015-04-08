@@ -1,6 +1,6 @@
 package io.tylerchesley.rendered.matcher;
 
-public class ClassPropertyGetter<E> implements PropertyGetter<Class<? extends E>, E> {
+public class ClassPropertyGetter<E> implements PropertyGetter<E, Class<? extends E>> {
 
     @Override
     public Class<E> get(E item) {

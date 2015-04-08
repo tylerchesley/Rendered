@@ -4,15 +4,15 @@ import android.support.annotation.NonNull;
 
 public class BooleanViewTypeMatcher<E> implements ViewTypeMatcher<E> {
 
-    public static <E> Builder<E> from(PropertyGetter<Boolean, E> getter) {
+    public static <E> Builder<E> from(PropertyGetter<E, Boolean> getter) {
         return new Builder<E>().getter(getter);
     }
 
     private final int trueViewType;
     private final int falseViewType;
-    private final PropertyGetter<Boolean, E> getter;
+    private final PropertyGetter<E, Boolean> getter;
 
-    public BooleanViewTypeMatcher(@NonNull PropertyGetter<Boolean, E> getter, int trueViewType,
+    public BooleanViewTypeMatcher(@NonNull PropertyGetter<E, Boolean> getter, int trueViewType,
                                   int falseViewType) {
         if (getter == null) {
             throw new NullPointerException("PropertyGetter may not be null");
@@ -43,11 +43,11 @@ public class BooleanViewTypeMatcher<E> implements ViewTypeMatcher<E> {
 
     public static final class Builder<E> {
 
-        private PropertyGetter<Boolean, E> getter;
+        private PropertyGetter<E, Boolean> getter;
         private int trueViewType = NO_MATCH;
         private int falseViewType = NO_MATCH;
 
-        public Builder<E> getter(PropertyGetter<Boolean, E> getter) {
+        public Builder<E> getter(PropertyGetter<E, Boolean> getter) {
             this.getter = getter;
             return this;
         }

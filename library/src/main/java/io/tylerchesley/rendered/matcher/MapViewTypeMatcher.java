@@ -7,14 +7,14 @@ import java.util.Map;
 
 public class MapViewTypeMatcher<E, T> implements ViewTypeMatcher<E> {
 
-    public static <E, T> Builder<E, T> from(PropertyGetter<T, E> getter) {
+    public static <E, T> Builder<E, T> from(PropertyGetter<E, T> getter) {
         return new Builder<>(getter);
     }
 
-    private final PropertyGetter<T, E> getter;
+    private final PropertyGetter<E, T> getter;
     private final Map<T, Integer> map;
 
-    public MapViewTypeMatcher(@NonNull PropertyGetter<T, E> getter, @NonNull Map<T, Integer> map) {
+    public MapViewTypeMatcher(@NonNull PropertyGetter<E, T> getter, @NonNull Map<T, Integer> map) {
         if (getter == null) {
             throw new NullPointerException("PropertyGetter may not be null");
         }
@@ -36,10 +36,10 @@ public class MapViewTypeMatcher<E, T> implements ViewTypeMatcher<E> {
 
     public static final class Builder<E, T> {
 
-        private final PropertyGetter<T, E> getter;
+        private final PropertyGetter<E, T> getter;
         private final Map<T, Integer> map;
 
-        public Builder(PropertyGetter<T, E> getter) {
+        public Builder(PropertyGetter<E, T> getter) {
             this.getter = getter;
             this.map = new HashMap<>();
         }
