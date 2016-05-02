@@ -1,4 +1,4 @@
-package io.tylerchesley.rendered;
+package io.tylerchesley.rendered.samples;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
